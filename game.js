@@ -1,7 +1,13 @@
 const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+const ctx = canvas?.getContext("2d");
 const statusEl = document.getElementById("status");
 const coinsEl = document.getElementById("coins");
+const startButton = document.getElementById("start");
+const resetButton = document.getElementById("reset");
+
+if (!canvas || !ctx) {
+  statusEl.textContent = "Canvas no disponible";
+}
 
 const TILE = 32;
 const LEVEL = [
@@ -48,7 +54,7 @@ const input = {
 };
 
 let coins = 0;
-let gameState = "playing";
+let gameState = "ready";
 
 const solidTiles = new Set(["G", "B"]);
 
@@ -60,7 +66,7 @@ function resetGame() {
   player.onGround = false;
   player.alive = true;
   coins = 0;
-  gameState = "playing";
+  gameState = "ready";
   statusEl.textContent = "Listo";
   coinsEl.textContent = coins;
 }
@@ -177,6 +183,7 @@ function update() {
 }
 
 function draw() {
+  if (!ctx) return;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const cameraX = Math.max(0, Math.min(player.x - canvas.width / 2, levelWidth * TILE - canvas.width));
 
@@ -223,6 +230,15 @@ function draw() {
   ctx.fillRect(player.x + 4, player.y + 6, player.width - 8, 8);
 
   ctx.restore();
+
+  if (gameState === "ready") {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "28px Trebuchet MS, sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("Haz clic en “Iniciar nivel” para jugar", canvas.width / 2, canvas.height / 2);
+  }
 }
 
 function loop() {
@@ -247,3 +263,14 @@ window.addEventListener("keyup", (event) => {
 
 resetGame();
 loop();
+
+startButton?.addEventListener("click", () => {
+  if (gameState === "ready") {
+    gameState = "playing";
+    statusEl.textContent = "¡A jugar!";
+  }
+});
+
+resetButton?.addEventListener("click", () => {
+  resetGame();
+});

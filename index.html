@@ -12,7 +12,13 @@
       <p>Controles: ◀ ▶ para moverte, espacio para saltar.</p>
     </header>
     <main>
-      <canvas id="game" width="960" height="540" aria-label="Juego de Mario Bros"></canvas>
+      <canvas id="game" width="960" height="540" aria-label="Juego de Mario Bros">
+        Tu navegador no soporta canvas. Prueba con otro navegador.
+      </canvas>
+      <section class="controls">
+        <button id="start">Iniciar nivel</button>
+        <button id="reset">Reiniciar</button>
+      </section>
       <section class="hud">
         <div><strong>Estado:</strong> <span id="status">Listo</span></div>
         <div><strong>Monedas:</strong> <span id="coins">0</span></div>
