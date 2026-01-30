@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mario Bros - Primera etapa</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Mario Bros - Primera etapa</h1>
+      <p>Controles: ◀ ▶ para moverte, espacio para saltar.</p>
+    </header>
+    <main>
+      <canvas id="game" width="960" height="540" aria-label="Juego de Mario Bros"></canvas>
+      <section class="hud">
+        <div><strong>Estado:</strong> <span id="status">Listo</span></div>
+        <div><strong>Monedas:</strong> <span id="coins">0</span></div>
+      </section>
+    </main>
+    <script src="game.js"></script>
+  </body>
+</html>
